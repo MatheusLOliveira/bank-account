@@ -1,4 +1,6 @@
 from abc import abstractmethod, ABC
+from data import FORMATACAO
+from log import log
 
 
 class Conta(ABC):
@@ -9,14 +11,16 @@ class Conta(ABC):
 
     def depositar(self, valor):
         self.saldo += valor
-        print(f"Foi depositado R$ {valor:.2f}")
+        log(self.conta, 'depósito', FORMATACAO, valor)
+        print(f"Valor depositado: R${valor:.2f}\n"
+              f"Solicitado em: {FORMATACAO}".replace('.', ','))
         self.detalhes()
         print()
 
     def detalhes(self):
         print(f"Agencia: {self.agencia} "
               f"Conta: {self.conta}"
-              f" Saldo: R$ {self.saldo:.2f}")
+              f" Saldo: R$ {self.saldo:.2f}".replace('.', ','))
 
     @abstractmethod
     def sacar(self, valor):
@@ -34,7 +38,9 @@ class ContaCorrente(Conta):
             return
 
         self.saldo -= valor
-        print(f"Foi sacado R$ {valor:.2f} da sua conta")
+        log(self.conta, 'saque', FORMATACAO, valor)
+        print(f"Valor do saque: R${valor:.2f}\n"
+              f"Solicitado em: {FORMATACAO}".replace('.', ','))
         self.detalhes()
         print()
 
@@ -46,6 +52,8 @@ class ContaPoupanca(Conta):
             return
 
         self.saldo -= valor
-        print(f"Foi sacado R$ {valor:.2f} da sua conta")
+        log(self.conta, 'saque', FORMATACAO, valor)
+        print(f"Valor do saque: R${valor:.2f}\n"
+              f"Solicitado em: {FORMATACAO}".replace('.', ','))
         self.detalhes()
         print()
