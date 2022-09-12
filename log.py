@@ -1,8 +1,3 @@
-from cliente import *
-
-history = []
-
-
 def log(nmro_conta, operacao, horario, valor):
     logg = f'---------------------------\n' \
            f'Número da Conta: {nmro_conta}\n' \
